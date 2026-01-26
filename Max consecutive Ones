@@ -1,0 +1,39 @@
+//Max consecutive Ones
+
+class Solution {
+public:
+    int findMaxConsecutiveOnes(vector<int> &nums) {
+        int n = nums.size();
+        int currentCount =0, maxCount = 0;
+        for(int i = 0; i < n ; i++){
+            if(nums[i] == 1){
+                currentCount++;
+            
+            maxCount = max(currentCount, maxCount);
+            }
+            else{
+                currentCount = 0;
+            }
+        }
+        return maxCount;
+    }
+};
+int main(){
+    int n;
+    cout << "Enter number of elements: ";
+    cin >> n;
+
+    vector<int> nums(n);
+
+    cout << "Enter elements (0 or 1): ";
+    for(int i = 0; i < n; i++){
+        cin >> nums[i];
+    }
+
+    Solution obj;
+    int result = obj.findMaxConsecutiveOnes(nums);
+
+    cout << "Max Consecutive Ones: " << result << endl;
+
+    return 0;
+}
