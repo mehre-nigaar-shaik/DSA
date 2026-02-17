@@ -1,0 +1,39 @@
+class Solution {
+public:
+    string removeDuplicateLetters(string s) {
+        vector<int> cnt(26, 0);
+        vector<bool> vis(26, false);
+        
+        // count frequency
+        for(char c : s) {
+            cnt[c - 'a']++;
+        }
+        
+        stack<char> st;
+        
+        for(char c : s) {
+            cnt[c - 'a']--;
+            
+            // if already used, skip
+            if(vis[c - 'a']) continue;
+            
+            // maintain lexicographical order
+            while(!st.empty() && c < st.top() && cnt[st.top() - 'a'] > 0) {
+                vis[st.top() - 'a'] = false;
+                st.pop();
+            }
+            
+            st.push(c);
+            vis[c - 'a'] = true;
+        }
+        
+        // build answer
+        string ans = "";
+        while(!st.empty()) {
+            ans = st.top() + ans;
+            st.pop();
+        }
+        
+        return ans;
+    }
+};
